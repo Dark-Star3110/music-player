@@ -106,6 +106,42 @@ const app = {
       path: "./assets/mp3/song14.mp3",
       image: "./assets/img/song14.jpg",
     },
+    {
+      name: "Xích Linh",
+      singer: "Đẳng Thập Ma Quân",
+      path: "./assets/mp3/song15.mp3",
+      image: "./assets/img/song15.jpg",
+    },
+    {
+      name: "Nửa Đời Tuyết",
+      singer: "Là Thất Thúc Đây",
+      path: "./assets/mp3/song16.mp3",
+      image: "./assets/img/song16.jpg",
+    },
+    {
+      name: "Hạ Sơn",
+      singer: "Yếu Bất Yếu Mãi Thái",
+      path: "./assets/mp3/song17.mp3",
+      image: "./assets/img/song17.jpg",
+    },
+    {
+      name: "Du Sơn Luyến",
+      singer: "Hải Luân",
+      path: "./assets/mp3/song18.mp3",
+      image: "./assets/img/song18.jpg",
+    },
+    {
+      name: "Trích Tiên",
+      singer: "Y Cách Tái Thính",
+      path: "./assets/mp3/song19.mp3",
+      image: "./assets/img/song19.jpg",
+    },
+    {
+      name: "Quẻ Bói",
+      singer: "Thôi Tử Cách",
+      path: "./assets/mp3/song20.mp3",
+      image: "./assets/img/song20.jpg",
+    },
   ],
   render: function () {
     // console.log("ok");
