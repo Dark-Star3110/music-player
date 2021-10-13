@@ -2,6 +2,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const player = $(".player");
+const playlist = $(".playlist");
 
 const heading = $("header h2");
 const cdThumb = $(".cd-thumb");
@@ -81,11 +82,37 @@ const app = {
       path: "./assets/mp3/song10.mp3",
       image: "./assets/img/song10.jpg",
     },
+    {
+      name: "Cho Em Cho Anh",
+      singer: "Mao Bất Dịch",
+      path: "./assets/mp3/song11.mp3",
+      image: "./assets/img/song11.jpg",
+    },
+    {
+      name: "At My Worst",
+      singer: "PinkSweet",
+      path: "./assets/mp3/song12.mp3",
+      image: "./assets/img/song12.jpg",
+    },
+    {
+      name: "Lovely",
+      singer: "BillieEilish,Khalid",
+      path: "./assets/mp3/song13.mp3",
+      image: "./assets/img/song13.jpg",
+    },
+    {
+      name: "Let Her Go",
+      singer: "Passenger",
+      path: "./assets/mp3/song14.mp3",
+      image: "./assets/img/song14.jpg",
+    },
   ],
   render: function () {
     // console.log("ok");
     const list = this.songs.map((song, index) => {
-      return `<div class="song ${index === this.currentIndex ? "active" : ""}">
+      return `<div class="song ${
+        index === this.currentIndex ? "active" : ""
+      }" data-index="${index}">
       <div class="thumb" style="background-image: url('${song.image}')">
       </div>
       <div class="body">
@@ -98,7 +125,7 @@ const app = {
       </div>
       `;
     });
-    $(".playlist").innerHTML = list.join("");
+    playlist.innerHTML = list.join("");
   },
   defineProperties: function () {
     Object.defineProperty(this, "currentSong", {
@@ -157,7 +184,6 @@ const app = {
 
     // pre next songs
     preBtn.onclick = () => {
-      this.currentDeg = 0;
       const count = this.songs.length;
       if (this.isRandom) {
         this.currentIndex = Math.floor(Math.random() * count);
@@ -177,7 +203,6 @@ const app = {
     nextBtn.onclick = () => {
       // console.log("next");
       // console.log(this);
-      this.currentDeg = 0;
       const count = this.songs.length;
       if (this.isRandom) {
         this.currentIndex = Math.floor(Math.random() * count);
@@ -201,7 +226,6 @@ const app = {
         audio.load();
         audio.play();
       } else {
-        this.currentDeg = 0;
         const count = this.songs.length;
         if (this.isRandom) {
           this.currentIndex = Math.floor(Math.random() * count);
@@ -215,6 +239,24 @@ const app = {
         this.loadCurrentSong();
         this.render();
         audio.play();
+      }
+    };
+
+    // move song when click on playlist
+    playlist.onclick = (e) => {
+      // console.log(e.target.closest(".song.active"));
+      // handle when click on song
+      const songPlaying = e.target.closest(".song.active");
+      if (!songPlaying) {
+        const songClick = e.target.closest(".song");
+        // console.log(songClick.getAttribute("data-index"));
+        const index = songClick.getAttribute("data-index");
+        this.currentIndex = parseInt(index);
+        this.loadCurrentSong();
+        this.render();
+        if (this.isPlaying) {
+          audio.play();
+        }
       }
     };
 
@@ -250,6 +292,8 @@ const app = {
     cdThumb.style.backgroundImage = `url("${this.currentSong.image}")`;
     audio.src = this.currentSong.path;
     cdThumb.style.transform = `rotate(0)`;
+    this.currentDeg = 0;
+    progress.value = 0;
   },
   start: function () {
     // dinh nghia thuoc tinh
